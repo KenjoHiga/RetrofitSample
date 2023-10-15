@@ -7,21 +7,21 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.kenjo_coding.androiddevtemplate.databinding.PokemonRowBinding;
-import com.kenjo_coding.androiddevtemplate.model.Pokemon;
+import com.kenjo_coding.androiddevtemplate.databinding.PokemonLinkRowBinding;
+import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonLink;
 
 import java.util.List;
 
 public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.MyViewHolder> {
 
-    private List<Pokemon> pokemons;
+    private List<PokemonLink> links;
     private OnItemClickListener listener; // itemクリック時のリスナー用
 
     // DataBindingを活用したカスタムViewHolder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // item単位でDataBindingする
-        private final PokemonRowBinding binding;
-        MyViewHolder(PokemonRowBinding binding) {
+        private final PokemonLinkRowBinding binding;
+        MyViewHolder(PokemonLinkRowBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -32,7 +32,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // ViewHolder生成時にDataBindingインスタンスを引数で渡す
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        PokemonRowBinding binding = PokemonRowBinding.inflate(layoutInflater, parent, false);
+        PokemonLinkRowBinding binding = PokemonLinkRowBinding.inflate(layoutInflater, parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -40,20 +40,20 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // positionより対象itemオブジェクトをDataBinding
-        holder.binding.setPokemon(pokemons.get(position));
+        holder.binding.setLink(links.get(position));
         // itemクリック時のリスナー
-        holder.itemView.setOnClickListener(view -> listener.onClick(view, pokemons.get(position)));
+        holder.itemView.setOnClickListener(view -> listener.onClick(view, links.get(position)));
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void setPokemons(List<Pokemon> pokemons) {
-        this.pokemons = pokemons;
+    public void setPokemonLinks(List<PokemonLink> links) {
+        this.links = links;
         notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return pokemons == null ? 0 : pokemons.size();
+        return links == null ? 0 : links.size();
     }
 
 
@@ -66,7 +66,7 @@ public class PokemonListAdapter extends RecyclerView.Adapter<PokemonListAdapter.
     // itemClick用にリスナーをカスタム
     public interface  OnItemClickListener {
         // 対象のitemオブジェクトごと渡す
-        void onClick(View view, Pokemon pokemon);
+        void onClick(View view, PokemonLink pokemon);
     }
 
 

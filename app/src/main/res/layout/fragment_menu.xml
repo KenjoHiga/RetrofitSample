@@ -7,7 +7,7 @@
     <data>
         <variable
             name="pokemon"
-            type="com.kenjo_coding.androiddevtemplate.model.Pokemon" />
+            type="com.kenjo_coding.androiddevtemplate.domain.entities.PokemonDetail" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,14 +1,26 @@
 package com.kenjo_coding.androiddevtemplate.ui;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
-import com.kenjo_coding.androiddevtemplate.model.Pokemon;
-import com.kenjo_coding.androiddevtemplate.model.PokemonList;
+import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonDetail;
+import com.kenjo_coding.androiddevtemplate.domain.PokemonList;
+import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonLink;
+import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonsResponse;
+import com.kenjo_coding.androiddevtemplate.infrastructure.ApiService;
+import com.kenjo_coding.androiddevtemplate.infrastructure.RetrofitClient;
 
 import java.util.List;
+
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import io.reactivex.rxjava3.observers.DisposableSingleObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 
 public class PokemonViewModel extends ViewModel {
@@ -16,16 +28,37 @@ public class PokemonViewModel extends ViewModel {
 
     /** ポケモンリストの処理 */
     // 定義
-    private MutableLiveData<List<Pokemon>> _pokemons = new MutableLiveData<>();
+    private MutableLiveData<List<PokemonLink>> _pokemonLinks = new MutableLiveData<>();
 
     // セット
-    public void onFetchPokemonsClicked() {
-        _pokemons.setValue(generatePokemons());
+    public void onFetchPokemonLinksClicked() {
+        String LIMIT = "10";
+        String OFFSET = "0";
+
+        RetrofitClient client = new RetrofitClient();
+        ApiService api = client.createApiService();
+
+        CompositeDisposable disposable = new CompositeDisposable();
+
+        disposable.add(api.getPokemonLinks(LIMIT, OFFSET)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<PokemonsResponse>() {
+                    @Override
+                    public void onSuccess(@NonNull PokemonsResponse response) {
+                        _pokemonLinks.setValue(response.results);
+                    }
+
+                    @Override public void onError(Throwable e) {
+                        Log.e(TAG, "e.getMessage():" + e.getMessage());
+                    }
+
+                }));
     }
 
     // 参照
-    public LiveData<List<Pokemon>> getPokemons() {
-        return _pokemons;
+    public LiveData<List<PokemonLink>> getPokemonLinks() {
+         return _pokemonLinks;
     }
 
 
@@ -34,67 +67,27 @@ public class PokemonViewModel extends ViewModel {
     /** 選択したポケモンの処理 */
 
     // 定義
-    private Pokemon targetPokemon;
+    private PokemonLink pokemonLink;
 
     // セット
-    public void setPokemon(Pokemon pokemon){
-        this.targetPokemon = pokemon;
+    public void onPokemonLinkClicked(PokemonLink link){
+        this.pokemonLink = link;
     }
 
     // 参照
-    public Pokemon getTargetPokemon(){
-        return targetPokemon;
-    }
+//    public PokemonDetail getTargetPokemon(){
+//        return targetPokemon;
+//    }
 
-    private List<Pokemon> generatePokemons(){
-        String pokemonJson = getPokemonJson();
+//    private List<PokemonDetail> generatePokemons(){
+//        String pokemonJson = getPokemonJson();
+//
+//        Gson gson = new Gson();
+//        //Gsonでパース
+//        List<PokemonDetail> pokemons = new Gson().fromJson(pokemonJson, PokemonList.class).getPokemons();
+//
+//        return pokemons;
+//    }
 
-        Gson gson = new Gson();
-        //Gsonでパース
-        List<Pokemon> pokemons = new Gson().fromJson(pokemonJson, PokemonList.class).getPokemons();
 
-        return pokemons;
-    }
-
-    private String getPokemonJson() {
-        return "{\n" +
-                "  \"pokemons\": [\n" +
-                "    {\n" +
-                "      \"height\": 7,\n" +
-                "      \"id\": 1,\n" +
-                "      \"name\": \"フシギダネ\",\n" +
-                "      \"type\": \"くさ\",\n" +
-                "      \"weight\": 69\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"height\": 10,\n" +
-                "      \"id\": 2,\n" +
-                "      \"name\": \"フシギソウ\",\n" +
-                "      \"type\": \"くさ\",\n" +
-                "      \"weight\": 130\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"height\": 20,\n" +
-                "      \"id\": 3,\n" +
-                "      \"name\": \"フシギバナ\",\n" +
-                "      \"type\": \"くさ\",\n" +
-                "      \"weight\": 1000\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"height\": 6,\n" +
-                "      \"id\": 4,\n" +
-                "      \"name\": \"ヒトカゲ\",\n" +
-                "      \"type\": \"ほのお\",\n" +
-                "      \"weight\": 85\n" +
-                "    },\n" +
-                "    {\n" +
-                "      \"height\": 11,\n" +
-                "      \"id\": 5,\n" +
-                "      \"name\": \"リザード\",\n" +
-                "      \"type\": \"ほのお\",\n" +
-                "      \"weight\": 190\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}";
-    }
 }

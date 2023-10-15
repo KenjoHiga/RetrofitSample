@@ -32,6 +32,8 @@ public class MenuFragment extends Fragment {
         binding.navigatePokemonList.setOnClickListener(v -> navigate(new PokemonListFragment()));
     }
 
+
+    // Fragment間の遷移
     private void navigate(Fragment fragment) {
         if (getActivity() != null) {
             getActivity().getSupportFragmentManager()

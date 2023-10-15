@@ -12,8 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.kenjo_coding.androiddevtemplate.R;
-import com.kenjo_coding.androiddevtemplate.databinding.FragmentPokemonListBinding;
-import com.kenjo_coding.androiddevtemplate.model.Pokemon;
+import com.kenjo_coding.androiddevtemplate.databinding.FragmentPokemonLinksBinding;
 import com.kenjo_coding.androiddevtemplate.ui.PokemonViewModel;
 import com.kenjo_coding.androiddevtemplate.ui.detail.PokemonDetailFragment;
 
@@ -21,14 +20,14 @@ import java.util.List;
 
 public class PokemonListFragment extends Fragment {
     private final String TAG = PokemonListFragment.class.getSimpleName();
-    private FragmentPokemonListBinding binding;
+    private FragmentPokemonLinksBinding binding;
     private PokemonViewModel viewModel;
     private PokemonListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // DataBinding用のインスタンスを生成
-        binding = FragmentPokemonListBinding.inflate(inflater, container, false);
+        binding = FragmentPokemonLinksBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -40,29 +39,27 @@ public class PokemonListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
 
         // ポケモンデータを取得
-        binding.fetchPokemonData.setOnClickListener(v -> viewModel.onFetchPokemonsClicked());
+        binding.fetchPokemonLinks.setOnClickListener(v -> viewModel.onFetchPokemonLinksClicked());
+
+        // RecyclerViewの初期設定
+        initializeRecyclerView();
 
         // ポケモンデータ取得状況を監視
-        viewModel.getPokemons().observe(getViewLifecycleOwner(), pokemons -> {
-            if(pokemons == null || pokemons.size() ==0) return;
-            setRecyclerView(pokemons);
+        viewModel.getPokemonLinks().observe(getViewLifecycleOwner(), links -> {
+            if(links == null || links.size() ==0) return;
+            adapter.setPokemonLinks(links);
         });
     }
 
-
-    // recyclerViewにポケモンリストをセット
-    private void setRecyclerView(List<Pokemon> pokemons) {
+    private void initializeRecyclerView() {
         adapter = new PokemonListAdapter();
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // ReceivingItemsをセット
-        adapter.setPokemons(pokemons);
-
         // ListViewクリック時の動作（adapter経由でリスナー取得）
-        adapter.setOnItemClickListener((v, pokemon) -> {
+        adapter.setOnItemClickListener((v, link) -> {
             // 選択されたpokemon情報をViewModelに引き渡し
-            viewModel.setPokemon(pokemon);
+            viewModel.onPokemonLinkClicked(link);
             navigate(new PokemonDetailFragment());
         });
     }

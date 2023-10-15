@@ -5,9 +5,7 @@
     >
 
     <data>
-        <variable
-            name="pokemon"
-            type="com.kenjo_coding.androiddevtemplate.model.Pokemon" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +31,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/fetchPokemonData"
+            app:layout_constraintBottom_toTopOf="@+id/fetchPokemonLinks"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -41,7 +39,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
         <Button
-            android:id="@+id/fetchPokemonData"
+            android:id="@+id/fetchPokemonLinks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
