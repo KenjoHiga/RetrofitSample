@@ -1,0 +1,87 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.kenjo_coding.androiddevtemplate'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.kenjo_coding.androiddevtemplate"
+        minSdk 30
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            applicationIdSuffix ".debug" //←追加
+            versionNameSuffix "_debug"  //←追加
+
+            resValue "string", "app_name", "dev_${app_name}"
+            manifestPlaceholders = [ic_launcher: "@mipmap/ic_launcher_debug"]
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            resValue "string", "app_name", "${app_name}"
+            manifestPlaceholders = [ic_launcher: "@mipmap/ic_launcher"]
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enable = true
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:deprecation"
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+    // Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // ローカル単体テスト用 ※デフォルトで入っている
+    testImplementation 'junit:junit:4.13.2'
+
+    // インストルメンテーションテスト ※デフォルトで入っている
+    // テストするアプリの Context などの情報を参照し、テスト対象のアプリをテストコードで制御することができる
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
+    // UIテスト用のライブラリ ※デフォルトで入っている
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Truth is a library for performing assertions in tests
+    // https://truth.dev/
+    testImplementation "com.google.truth:truth:1.1.3"
+}

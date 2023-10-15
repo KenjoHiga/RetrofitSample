@@ -1,0 +1,44 @@
+{
+  "pokemons": [
+    {
+      "height": 7,
+      "id": 1,
+      "imageUrlDefault": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+      "imageUrlOfficial": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      "name": "bulbasaur",
+      "weight": 69
+    },
+    {
+      "height": 10,
+      "id": 2,
+      "imageUrlDefault": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
+      "imageUrlOfficial": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+      "name": "ivysaur",
+      "weight": 130
+    },
+    {
+      "height": 20,
+      "id": 3,
+      "imageUrlDefault": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
+      "imageUrlOfficial": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+      "name": "venusaur",
+      "weight": 1000
+    },
+    {
+      "height": 6,
+      "id": 4,
+      "imageUrlDefault": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
+      "imageUrlOfficial": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+      "name": "charmander",
+      "weight": 85
+    },
+    {
+      "height": 11,
+      "id": 5,
+      "imageUrlDefault": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
+      "imageUrlOfficial": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+      "name": "charmeleon",
+      "weight": 190
+    }
+  ]
+}
