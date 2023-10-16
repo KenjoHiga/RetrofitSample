@@ -14,174 +14,174 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="選択したポケモンの詳細"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <TextView-->
+<!--            android:id="@+id/textTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="選択したポケモンの詳細"-->
+<!--            android:textSize="20sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <TextView
-            android:id="@+id/textName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginEnd="50dp"
-            android:fontFamily="sans-serif-black"
-            android:text="@{pokemon.name}"
-            android:textAlignment="center"
-            android:textSize="48sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitle"
-            tools:text="name" />
+<!--        <TextView-->
+<!--            android:id="@+id/textName"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="50dp"-->
+<!--            android:layout_marginTop="60dp"-->
+<!--            android:layout_marginEnd="50dp"-->
+<!--            android:fontFamily="sans-serif-black"-->
+<!--            android:text="@{pokemon.name}"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="48sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textTitle"-->
+<!--            tools:text="name" />-->
 
-        <TextView
-            android:id="@+id/textId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textSize="24sp"
-            android:text="@{String.valueOf(pokemon.id)}"
-            app:layout_constraintEnd_toEndOf="@+id/textName"
-            app:layout_constraintStart_toStartOf="@+id/textName"
-            app:layout_constraintTop_toBottomOf="@+id/textName"
-            tools:text="id" />
+<!--        <TextView-->
+<!--            android:id="@+id/textId"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:textSize="24sp"-->
+<!--            android:text="@{String.valueOf(pokemon.id)}"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/textName"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textName"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textName"-->
+<!--            tools:text="id" />-->
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:error="@{@android:drawable/btn_dialog}"
-            app:imageUrl="@{pokemon.officialImageUrl}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textId"
-            tools:srcCompat="@tools:sample/avatars" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            app:error="@{@android:drawable/btn_dialog}"-->
+<!--            app:imageUrl="@{pokemon.officialImageUrl}"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textId"-->
+<!--            tools:srcCompat="@tools:sample/avatars" />-->
 
-        <TextView
-            android:id="@+id/textType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:textSize="24sp"
-            android:text="@{pokemon.type}"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:text="type" />
+<!--        <TextView-->
+<!--            android:id="@+id/textType"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:textSize="24sp"-->
+<!--            android:text="@{pokemon.type}"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/imageView"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/imageView"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageView"-->
+<!--            tools:text="type" />-->
 
-        <TextView
-            android:id="@+id/textHeight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            android:text="@{String.valueOf(pokemon.height)}"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/close"
-            app:layout_constraintEnd_toStartOf="@+id/textWeight"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textType"
-            tools:text="height" />
+<!--        <TextView-->
+<!--            android:id="@+id/textHeight"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="80dp"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:layout_marginEnd="32dp"-->
+<!--            android:text="@{String.valueOf(pokemon.height)}"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/close"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/textWeight"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textType"-->
+<!--            tools:text="height" />-->
 
-        <TextView
-            android:id="@+id/textWeight"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="80dp"
-            android:text="@{String.valueOf(pokemon.weight)}"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textHeight"
-            app:layout_constraintTop_toTopOf="@+id/textHeight"
-            tools:text="weight" />
+<!--        <TextView-->
+<!--            android:id="@+id/textWeight"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:layout_marginEnd="80dp"-->
+<!--            android:text="@{String.valueOf(pokemon.weight)}"-->
+<!--            android:textAlignment="center"-->
+<!--            android:textSize="24sp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/textHeight"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/textHeight"-->
+<!--            tools:text="weight" />-->
 
-        <TextView
-            android:id="@+id/labelName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="名前"
-            app:layout_constraintBottom_toTopOf="@+id/textName"
-            app:layout_constraintEnd_toEndOf="@+id/textName"
-            app:layout_constraintStart_toStartOf="@+id/textName" />
+<!--        <TextView-->
+<!--            android:id="@+id/labelName"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="名前"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textName"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/textName"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textName" />-->
 
-        <TextView
-            android:id="@+id/labelId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ID"
-            app:layout_constraintBottom_toTopOf="@+id/textId"
-            app:layout_constraintStart_toStartOf="@+id/textId" />
+<!--        <TextView-->
+<!--            android:id="@+id/labelId"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="ID"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textId"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textId" />-->
 
-        <TextView
-            android:id="@+id/labelType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="タイプ"
-            app:layout_constraintBottom_toTopOf="@+id/textType"
-            app:layout_constraintStart_toStartOf="@+id/textType" />
+<!--        <TextView-->
+<!--            android:id="@+id/labelType"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="タイプ"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textType"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textType" />-->
 
-        <TextView
-            android:id="@+id/labelHeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="高さ"
-            app:layout_constraintBottom_toTopOf="@+id/textHeight"
-            app:layout_constraintEnd_toEndOf="@+id/textHeight"
-            app:layout_constraintStart_toStartOf="@+id/textHeight" />
+<!--        <TextView-->
+<!--            android:id="@+id/labelHeight"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="高さ"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textHeight"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/textHeight"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textHeight" />-->
 
-        <TextView
-            android:id="@+id/heightUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="m"
-            app:layout_constraintBottom_toBottomOf="@+id/textHeight"
-            app:layout_constraintStart_toEndOf="@+id/textHeight" />
+<!--        <TextView-->
+<!--            android:id="@+id/heightUnit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:text="m"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/textHeight"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/textHeight" />-->
 
-        <TextView
-            android:id="@+id/weightUnit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="kg"
-            app:layout_constraintBottom_toBottomOf="@+id/textWeight"
-            app:layout_constraintStart_toEndOf="@+id/textWeight" />
+<!--        <TextView-->
+<!--            android:id="@+id/weightUnit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="8dp"-->
+<!--            android:text="kg"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/textWeight"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/textWeight" />-->
 
-        <TextView
-            android:id="@+id/labelWeight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="重さ"
-            app:layout_constraintBottom_toTopOf="@+id/textWeight"
-            app:layout_constraintEnd_toEndOf="@+id/textWeight"
-            app:layout_constraintStart_toStartOf="@+id/textWeight" />
+<!--        <TextView-->
+<!--            android:id="@+id/labelWeight"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="重さ"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/textWeight"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/textWeight"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/textWeight" />-->
 
-        <Button
-            android:id="@+id/close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="閉じる"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+<!--        <Button-->
+<!--            android:id="@+id/close"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="32dp"-->
+<!--            android:text="閉じる"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintHorizontal_bias="0.5"-->
+<!--            app:layout_constraintStart_toStartOf="parent" />-->
 
 
 

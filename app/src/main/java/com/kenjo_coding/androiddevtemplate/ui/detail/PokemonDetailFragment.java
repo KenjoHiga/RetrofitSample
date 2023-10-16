@@ -33,11 +33,11 @@ public class PokemonDetailFragment extends Fragment {
         // ViewModelインスタンスの生成
         viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
 
-        // 前画面で選択済のポケモン情報をセット（DataBinding）
-        binding.setPokemon(viewModel.getTargetPokemon());
-
-        // 閉じるボタン押下（リストに戻る）
-        binding.close.setOnClickListener(v -> navigate(new PokemonListFragment()));
+//        // 前画面で選択済のポケモン情報をセット（DataBinding）
+//        binding.setPokemon(viewModel.getTargetPokemon());
+//
+//        // 閉じるボタン押下（リストに戻る）
+//        binding.close.setOnClickListener(v -> navigate(new PokemonListFragment()));
     }
 
     private void navigate(Fragment fragment) {

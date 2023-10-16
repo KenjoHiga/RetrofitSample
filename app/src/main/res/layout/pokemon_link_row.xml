@@ -6,9 +6,6 @@
 
     <data>
         <variable
-            name="id"
-            type="Integer" />
-        <variable
             name="link"
             type="com.kenjo_coding.androiddevtemplate.domain.entities.PokemonLink" />
     </data>
@@ -41,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="sans-serif-black"
-                    android:text="@{String.valueOf(id)}"
+                    android:text="@{link.id}"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
