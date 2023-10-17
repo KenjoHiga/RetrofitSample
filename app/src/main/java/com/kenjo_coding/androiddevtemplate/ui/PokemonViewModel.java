@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonDetail;
-import com.kenjo_coding.androiddevtemplate.domain.PokemonList;
 import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonLink;
 import com.kenjo_coding.androiddevtemplate.domain.entities.PokemonsResponse;
 import com.kenjo_coding.androiddevtemplate.infrastructure.ApiService;
@@ -30,10 +30,15 @@ public class PokemonViewModel extends ViewModel {
     // 定義
     private MutableLiveData<List<PokemonLink>> _pokemonLinks = new MutableLiveData<>();
 
+    // 参照
+    public LiveData<List<PokemonLink>> getPokemonLinks() {
+        return _pokemonLinks;
+    }
+
     // セット
     public void onFetchPokemonLinksClicked() {
-        String LIMIT = "10";
-        String OFFSET = "0";
+        String LIMIT = "10"; // 一度に取得するポケモンの数
+        String OFFSET = "0"; // 先頭からのオフセット
 
         RetrofitClient client = new RetrofitClient();
         ApiService api = client.createApiService();
@@ -52,42 +57,47 @@ public class PokemonViewModel extends ViewModel {
                     @Override public void onError(Throwable e) {
                         Log.e(TAG, "e.getMessage():" + e.getMessage());
                     }
-
-                }));
-    }
-
-    // 参照
-    public LiveData<List<PokemonLink>> getPokemonLinks() {
-         return _pokemonLinks;
+                })
+        );
     }
 
 
 
 
     /** 選択したポケモンの処理 */
-
     // 定義
-    private PokemonLink pokemonLink;
+    private  MutableLiveData<PokemonDetail> _targetPokemonDetail = new MutableLiveData<>();
+
+    // 参照
+    public LiveData<PokemonDetail> getTargetPokemonDetail(){
+        return _targetPokemonDetail;
+    }
 
     // セット
     public void onPokemonLinkClicked(PokemonLink link){
-        this.pokemonLink = link;
+        RetrofitClient client = new RetrofitClient();
+        ApiService api = client.createApiService();
+
+        CompositeDisposable disposable = new CompositeDisposable();
+
+        disposable.add(api.getPokemon(link.id())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<PokemonDetail>() {
+                    @Override
+                    public void onSuccess(@NonNull PokemonDetail response) {
+
+                        // Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        // Log.d(TAG, "gson.toJson(response):" + gson.toJson(response));
+
+                        _targetPokemonDetail.setValue(response);
+                    }
+
+                    @Override public void onError(Throwable e) {
+                        Log.e(TAG, "e.getMessage():" + e.getMessage());
+                    }
+                })
+        );
     }
-
-    // 参照
-//    public PokemonDetail getTargetPokemon(){
-//        return targetPokemon;
-//    }
-
-//    private List<PokemonDetail> generatePokemons(){
-//        String pokemonJson = getPokemonJson();
-//
-//        Gson gson = new Gson();
-//        //Gsonでパース
-//        List<PokemonDetail> pokemons = new Gson().fromJson(pokemonJson, PokemonList.class).getPokemons();
-//
-//        return pokemons;
-//    }
-
 
 }

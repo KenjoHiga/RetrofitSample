@@ -46,7 +46,7 @@ public class PokemonListFragment extends Fragment {
 
         // ポケモンデータ取得状況を監視
         viewModel.getPokemonLinks().observe(getViewLifecycleOwner(), links -> {
-            if(links == null || links.size() ==0) return;
+            if(links == null) return;
             adapter.setPokemonLinks(links);
         });
     }

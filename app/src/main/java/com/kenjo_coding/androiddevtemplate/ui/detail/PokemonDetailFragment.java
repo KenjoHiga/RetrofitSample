@@ -16,6 +16,7 @@ import com.kenjo_coding.androiddevtemplate.ui.PokemonViewModel;
 import com.kenjo_coding.androiddevtemplate.ui.list.PokemonListFragment;
 
 public class PokemonDetailFragment extends Fragment {
+    private final String TAG = PokemonDetailFragment.class.getSimpleName();
     private FragmentPokemonDetailBinding binding;
     private PokemonViewModel viewModel;
 
@@ -33,11 +34,14 @@ public class PokemonDetailFragment extends Fragment {
         // ViewModelインスタンスの生成
         viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
 
-//        // 前画面で選択済のポケモン情報をセット（DataBinding）
-//        binding.setPokemon(viewModel.getTargetPokemon());
-//
-//        // 閉じるボタン押下（リストに戻る）
-//        binding.close.setOnClickListener(v -> navigate(new PokemonListFragment()));
+        // ポケモンデータ取得状況を監視
+        viewModel.getTargetPokemonDetail().observe(getViewLifecycleOwner(), pokemonDetail -> {
+            if(pokemonDetail == null) return;
+            binding.setPokemon(pokemonDetail);
+        });
+
+        // 閉じるボタン押下（リストに戻る）
+        binding.close.setOnClickListener(v -> navigate(new PokemonListFragment()));
     }
 
     private void navigate(Fragment fragment) {

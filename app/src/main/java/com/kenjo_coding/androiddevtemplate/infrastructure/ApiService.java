@@ -8,10 +8,15 @@ import java.util.List;
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("pokemon")
     Single<PokemonsResponse> getPokemonLinks(
             @Query("limit") String limit, @Query("offset") String offset);
+
+    @GET("pokemon/{id}")
+    Single<PokemonDetail> getPokemon(
+            @Path("id") String id);
 }
