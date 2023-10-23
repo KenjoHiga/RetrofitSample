@@ -39,7 +39,10 @@ public class PokemonListFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(PokemonViewModel.class);
 
         // ポケモンデータを取得
-        binding.fetchPokemonLinks.setOnClickListener(v -> viewModel.onFetchPokemonLinksClicked());
+        binding.fetchPokemonLinks.setOnClickListener(v -> viewModel.onFetchPokemonClicked());
+
+        // 次の10匹押下
+        binding.next10.setOnClickListener(v -> viewModel.onNext10Clicked());
 
         // RecyclerViewの初期設定
         initializeRecyclerView();
@@ -51,6 +54,7 @@ public class PokemonListFragment extends Fragment {
         });
     }
 
+    // RecyclerViewの初期設定
     private void initializeRecyclerView() {
         adapter = new PokemonListAdapter();
         binding.recyclerView.setAdapter(adapter);

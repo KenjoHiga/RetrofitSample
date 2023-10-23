@@ -13,7 +13,7 @@ public class RetrofitClient {
 
     // logger
     HttpLoggingInterceptor logger = new HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY); // BASIC or BODY
+                .setLevel(HttpLoggingInterceptor.Level.BASIC); // BASIC or BODY
 
     // OkHttpClientインスタンス
     OkHttpClient okhttpClient = new OkHttpClient.Builder()
