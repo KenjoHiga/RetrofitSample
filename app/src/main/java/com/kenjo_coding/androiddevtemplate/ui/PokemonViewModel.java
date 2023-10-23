@@ -26,6 +26,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public class PokemonViewModel extends ViewModel {
     private static final String TAG = PokemonViewModel.class.getSimpleName();
 
+    private final int SEARCH_LIMIT = 10; // 一度に取得するポケモンの数
+    private int searchOffset = 0; // 先頭IDからのオフセット
+
     /** ポケモンリストの処理 */
     // 定義
     private MutableLiveData<List<PokemonLink>> _pokemonLinks = new MutableLiveData<>();
@@ -35,17 +38,25 @@ public class PokemonViewModel extends ViewModel {
         return _pokemonLinks;
     }
 
-    // セット
-    public void onFetchPokemonLinksClicked() {
-        String LIMIT = "10"; // 一度に取得するポケモンの数
-        String OFFSET = "0"; // 先頭からのオフセット
+    // 取得
+    public void onFetchPokemonClicked(){
+        searchOffset = 0;
+        fetchPokemon();
+    }
+
+    public void onNext10Clicked(){
+        searchOffset += 10;
+        fetchPokemon();
+    }
+
+    private void fetchPokemon() {
 
         RetrofitClient client = new RetrofitClient();
         ApiService api = client.createApiService();
 
         CompositeDisposable disposable = new CompositeDisposable();
 
-        disposable.add(api.getPokemonLinks(LIMIT, OFFSET)
+        disposable.add(api.getPokemonLinks(String.valueOf(SEARCH_LIMIT), String.valueOf(searchOffset))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<PokemonsResponse>() {
@@ -60,8 +71,6 @@ public class PokemonViewModel extends ViewModel {
                 })
         );
     }
-
-
 
 
     /** 選択したポケモンの処理 */
@@ -87,8 +96,8 @@ public class PokemonViewModel extends ViewModel {
                     @Override
                     public void onSuccess(@NonNull PokemonDetail response) {
 
-                        // Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        // Log.d(TAG, "gson.toJson(response):" + gson.toJson(response));
+                         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                         Log.d(TAG, "gson.toJson(response):" + gson.toJson(response));
 
                         _targetPokemonDetail.setValue(response);
                     }
